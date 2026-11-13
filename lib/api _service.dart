@@ -25,7 +25,17 @@ class ApiService {
     }
 
     return (meals as List)
-        .map((item) => ArticleModel.fromJson(item))
+        .asMap()
+        .entries
+        .map((entry) {
+          final index = entry.key;
+          final item = entry.value;
+
+          return ArticleModel.fromJson(
+            item,
+            harga: 15000 + (index * 5000),
+          );
+        })
         .toList();
   }
 }
